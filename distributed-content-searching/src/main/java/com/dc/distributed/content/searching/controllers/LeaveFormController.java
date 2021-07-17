@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LeaveFormController {
 
-    private CommandProcessor commandProcessor;
+    private final CommandProcessor commandProcessor;
 
     public LeaveFormController(CommandProcessor commandProcessor) {
+
         this.commandProcessor = commandProcessor;
     }
-
 
     @PostMapping("/leave")
     public String indexSubmit(@ModelAttribute Status status) {

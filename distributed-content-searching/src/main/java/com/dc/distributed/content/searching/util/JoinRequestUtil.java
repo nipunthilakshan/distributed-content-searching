@@ -13,17 +13,17 @@ import java.util.Random;
 public class JoinRequestUtil {
 
     private JoinRequestUtil() {
+
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinRequestUtil.class);
     private static final int MINIMUM_NEIGHBOURS = 2;
     private static final Random random = new Random();
 
-
     public static boolean hasEnoughNeighbours(ApplicationState applicationState) {
+
         return applicationState.getNeighbours().size() >= MINIMUM_NEIGHBOURS;
     }
-
 
     public static int noOfNeighboursNeeded(ApplicationState applicationState) {
         //return 0 if negative number

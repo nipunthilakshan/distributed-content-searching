@@ -1,6 +1,5 @@
 package com.dc.distributed.content.searching.parsers.requestparsers;
 
-
 import com.dc.distributed.content.searching.commands.SearchReply;
 
 import java.util.List;

@@ -26,14 +26,13 @@ public class JoinReplyParser implements ReplyParser {
 
         switch (statusCode) {
             case JOIN_SUCCESS:
-                LOGGER.info("Join Reply Success received {} {}",requesterAddr.getHostAddress(), requesterPort);
+                LOGGER.info("Join Reply Success received {} {}", requesterAddr.getHostAddress(), requesterPort);
                 return new JoinReply(null, -1, requesterAddr.getHostAddress(), requesterPort, true);
             case JOIN_FAILED:
                 return new JoinReply(null, -1, requesterAddr.getHostAddress(), requesterPort, false);
             default:
                 throw new IllegalArgumentException("Invalid Reply From Neighbour status code = " + statusCode);
         }
-
 
     }
 }

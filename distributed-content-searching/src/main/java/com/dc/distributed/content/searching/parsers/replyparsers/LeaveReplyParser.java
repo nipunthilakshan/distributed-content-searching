@@ -24,14 +24,13 @@ public class LeaveReplyParser implements ReplyParser {
 
         switch (statusCode) {
             case LEAVE_SUCCESS:
-                LOGGER.info("Leave Reply Success received {} {}",requesterAddr.getHostAddress(), requesterPort);
+                LOGGER.info("Leave Reply Success received {} {}", requesterAddr.getHostAddress(), requesterPort);
                 return new LeaveReply(null, -1, requesterAddr.getHostAddress(), requesterPort, true);
             case LEAVE_FAILED:
                 return new LeaveReply(null, -1, requesterAddr.getHostAddress(), requesterPort, false);
             default:
                 throw new IllegalArgumentException("Invalid Reply From Neighbour status code = " + statusCode);
         }
-
 
     }
 }

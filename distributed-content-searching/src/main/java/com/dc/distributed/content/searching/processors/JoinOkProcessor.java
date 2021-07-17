@@ -15,6 +15,7 @@ public class JoinOkProcessor extends AbstractCommandProcessor<JoinReply> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinOkProcessor.class);
 
     public JoinOkProcessor(ApplicationState applicationState, CommandSender commandSender) {
+
         super(applicationState, commandSender);
     }
 

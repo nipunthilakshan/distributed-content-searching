@@ -11,10 +11,12 @@ public class SocketHolder {
     private DatagramSocket socket;
 
     public synchronized void initSocket(int port) throws SocketException {
+
         socket = new DatagramSocket(port);
     }
 
     public DatagramSocket getSocket() {
+
         return socket;
     }
 }

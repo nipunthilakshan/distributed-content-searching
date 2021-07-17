@@ -28,6 +28,7 @@ public class CommandParser {
     private Map<String, Supplier<ReplyParser>> replyParsers;
 
     public CommandParser() {
+
         initialiseRequestParsers();
         initialiseReplyParsers();
     }
@@ -35,17 +36,20 @@ public class CommandParser {
     private static final String SPLIT_REGEX = "(?<!\\\\)\\s+";
 
     public AbstractCommand parse(String commandString, InetAddress requesterAddr, int requesterPort) throws IOException {
+
         String[] parts = commandString.split(SPLIT_REGEX);
         return replyParsers.getOrDefault(parts[1], DefaultParser::new).get().parse(parts, requesterAddr, requesterPort);
     }
 
     public String parse(AbstractCommand command) {
+
         RequestParser<AbstractCommand> parser = requestParsers.get(command.getCommandType()).get();
         String parsedCommand = parser.parse(command);
         return parser.setCommandLength(parsedCommand);
     }
 
     private void initialiseRequestParsers() {
+
         this.requestParsers = new HashMap<>();
         requestParsers.put(RegisterRequest.REG, RegRequesterParser::new);
         requestParsers.put(SearchRequest.SER, SearchRequestParser::new);
@@ -58,6 +62,7 @@ public class CommandParser {
     }
 
     private void initialiseReplyParsers() {
+
         this.replyParsers = new HashMap<>();
         replyParsers.put(RegisterReply.REGOK, RegReplyParser::new);
         replyParsers.put(SearchReply.SEROK, SearchOkParser::new);

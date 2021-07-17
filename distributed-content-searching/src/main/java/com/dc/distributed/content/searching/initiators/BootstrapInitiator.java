@@ -38,16 +38,18 @@ public class BootstrapInitiator implements ApplicationListener<ApplicationReadyE
     int bootstrapPort;
 
     public BootstrapInitiator(Bootstrap bootstrap, CommandListener commandListener) {
+
         this.bootstrap = bootstrap;
         this.commandListener = commandListener;
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+
         try {
             commandListener.start();
 
-            InputParameters.refresh( bootstrapAddr, bootstrapPort, ip, port, username );
+            InputParameters.refresh(bootstrapAddr, bootstrapPort, ip, port, username);
             bootstrap.connectToBootstrapServer(ip, port, bootstrapAddr, bootstrapPort, username);
         } catch (IOException e) {
             LOGGER.error("Registering to bootstrap failed.", e);

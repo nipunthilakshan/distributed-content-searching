@@ -15,10 +15,11 @@ import java.util.Random;
 @RestController
 public class DownloadController {
 
-    private FileRegistry fileRegistry;
-    private Random random;
+    private final FileRegistry fileRegistry;
+    private final Random random;
 
     public DownloadController(FileRegistry fileRegistry) {
+
         this.fileRegistry = fileRegistry;
         this.random = new Random();
     }

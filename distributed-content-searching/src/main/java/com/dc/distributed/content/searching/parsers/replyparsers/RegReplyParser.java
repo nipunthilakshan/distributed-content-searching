@@ -13,22 +13,21 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 
 @Service
-public class RegReplyParser implements ReplyParser
-{
-    private static final Logger LOGGER = LoggerFactory.getLogger( RegReplyParser.class );
+public class RegReplyParser implements ReplyParser {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegReplyParser.class);
 
     @Autowired
     private UnregisterProcessor unregisterProcessor;
 
     @Override
-    public RegisterReply parse( String[] commandParts, InetAddress requesterAddr, int requesterPort ) throws IOException
-    {
+    public RegisterReply parse(String[] commandParts, InetAddress requesterAddr, int requesterPort) throws IOException {
+
         ArrayList<Neighbour> neighbours = new ArrayList<>();
 
         int numberOfNeighbours = Integer.parseInt(commandParts[2]);
 
-        if( numberOfNeighbours == 9998 )
-        {
+        if (numberOfNeighbours == 9998) {
             LOGGER.info("Unregistering node");
             unregisterProcessor.unregister();
             return null;

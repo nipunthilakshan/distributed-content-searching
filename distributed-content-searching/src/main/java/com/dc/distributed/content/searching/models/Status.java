@@ -8,6 +8,7 @@ import java.util.List;
 
 public @Data
 class Status {
+
     private List<Neighbour> neighbours;
     private SearchForm searchForm;
     private List<SearchRequest> ongoingRequests;

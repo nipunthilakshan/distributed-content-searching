@@ -23,11 +23,13 @@ public class SocketInitiator implements ApplicationListener<ApplicationReadyEven
     private final SocketHolder socketHolder;
 
     public SocketInitiator(SocketHolder socketHolder) {
+
         this.socketHolder = socketHolder;
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+
         try {
             socketHolder.initSocket(clientPort);
         } catch (SocketException e) {

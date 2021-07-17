@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 public class LeaveResponseParser implements ReplyParser {
+
     @Override
     public LeaveRequest parse(String[] commandParts, InetAddress requesterAddr, int requesterPort) throws IOException {
         // length JOIN IP_address port_no

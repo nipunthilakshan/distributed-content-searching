@@ -20,11 +20,13 @@ public class CommandSender {
     private final SocketHolder socketHolder;
 
     public CommandSender(CommandParser commandParser, SocketHolder socketHolder) {
+
         this.commandParser = commandParser;
         this.socketHolder = socketHolder;
     }
 
     public void sendRequest(AbstractCommand request) throws IOException {
+
         String requestStr = commandParser.parse(request);
         DatagramSocket socket = socketHolder.getSocket();
         InetAddress address = InetAddress.getByName(request.getOtherPartyIp());

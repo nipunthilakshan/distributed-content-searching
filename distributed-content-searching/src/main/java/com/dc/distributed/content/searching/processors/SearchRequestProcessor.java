@@ -25,6 +25,7 @@ public class SearchRequestProcessor extends AbstractCommandProcessor<SearchReque
     private final FileRegistry fileRegistry;
 
     public SearchRequestProcessor(ApplicationState applicationState, CommandSender commandSender, FileRegistry fileRegistry) {
+
         super(applicationState, commandSender);
         this.fileRegistry = fileRegistry;
     }
@@ -60,6 +61,7 @@ public class SearchRequestProcessor extends AbstractCommandProcessor<SearchReque
     }
 
     private void replyWithSerOk(SearchRequest reply, List<String> matchingFiles) {
+
         SearchHit searchHit = new SearchHit();
         searchHit.setFileNames(matchingFiles);
         searchHit.setOwnerIp(getApplicationState().getIpAddress());
@@ -75,6 +77,7 @@ public class SearchRequestProcessor extends AbstractCommandProcessor<SearchReque
     }
 
     private void passRequestToNeighbours(SearchRequest reply) {
+
         getApplicationState().getNeighbours().forEach(neighbour -> {
             SearchRequest request = new SearchRequest(reply.getIssuerIp(), reply.getIssuerPort(), neighbour.getIp(),
                     neighbour.getPort(), reply.getFileName(), reply.getHopCount() + 1);
@@ -87,6 +90,7 @@ public class SearchRequestProcessor extends AbstractCommandProcessor<SearchReque
     }
 
     private void replyWithSearchFailed(SearchRequest message) {
+
         SearchReply newReply = new SearchReply(message.getIssuerIp(), message.getIssuerPort(), message.getOtherPartyIp(),
                 message.getOtherPartyPort(), null);
 

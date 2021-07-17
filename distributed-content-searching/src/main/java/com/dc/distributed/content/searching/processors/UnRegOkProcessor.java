@@ -14,14 +14,16 @@ import java.io.IOException;
 
 @Service
 public class UnRegOkProcessor extends AbstractCommandProcessor<UnregisterReply> {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(UnRegOkProcessor.class);
     @Autowired
     private Bootstrap bootstrap;
 
-    private ApplicationState applicationState;
+    private final ApplicationState applicationState;
     private final CommandSender commandSender;
 
     public UnRegOkProcessor(ApplicationState applicationState, CommandSender commandSender) {
+
         super(applicationState, commandSender);
 
         this.applicationState = applicationState;
@@ -30,6 +32,7 @@ public class UnRegOkProcessor extends AbstractCommandProcessor<UnregisterReply> 
 
     @Override
     protected void processSynchronously(UnregisterReply message) throws IOException {
+
         if (message.getStatus() == 9999) {
             System.out.println("____________________ERROR________________________");
         } else if (message.getStatus() == 0) {

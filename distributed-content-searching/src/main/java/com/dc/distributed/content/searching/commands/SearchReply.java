@@ -7,15 +7,17 @@ import lombok.Getter;
 public class SearchReply extends AbstractCommand {
 
     public static final String SEROK = "SEROK";
-    private SearchHit searchHit;
+    private final SearchHit searchHit;
 
     public SearchReply(String issuerIp, int issuerPort, String requesterIp, int requesterPort, SearchHit searchHit) {
+
         super(issuerIp, issuerPort, requesterIp, requesterPort);
         this.searchHit = searchHit;
     }
 
     @Override
     public String getCommandType() {
+
         return SEROK;
     }
 }

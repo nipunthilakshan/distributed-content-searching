@@ -16,19 +16,19 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationState {
 
     @Getter
-    private List<Neighbour> neighbours;
+    private final List<Neighbour> neighbours;
 
     @Value("${ongoingrequests.timetolive}")
     private int timeToLive;
 
     @Getter
-    private List<Neighbour> potentialNeighbours;
+    private final List<Neighbour> potentialNeighbours;
 
     @Getter
-    private Cache<String, SearchRequest> ongoingRequests;
+    private final Cache<String, SearchRequest> ongoingRequests;
 
     @Getter
-    private List<SearchHit> searchHits;
+    private final List<SearchHit> searchHits;
 
     @Getter
     @Value("${client.ip}")
@@ -43,6 +43,7 @@ public class ApplicationState {
     private int downloadPort;
 
     public ApplicationState() {
+
         this.neighbours = new ArrayList<>();
         this.searchHits = new ArrayList<>();
         this.potentialNeighbours = new ArrayList<>();
@@ -52,6 +53,7 @@ public class ApplicationState {
     }
 
     public void addNeighbour(Neighbour neighbour) {
+
         this.neighbours.add(neighbour);
     }
 }

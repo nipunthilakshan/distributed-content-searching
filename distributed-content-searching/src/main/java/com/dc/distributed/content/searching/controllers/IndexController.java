@@ -23,12 +23,14 @@ public class IndexController {
     private final CommandProcessor commandProcessor;
 
     public IndexController(ApplicationState applicationState, CommandProcessor commandProcessor) {
+
         this.applicationState = applicationState;
         this.commandProcessor = commandProcessor;
     }
 
     @GetMapping("/")
     public String index(Model model) {
+
         Status status = new Status();
         resetModel(status);
         model.addAttribute("status", status);
@@ -38,6 +40,7 @@ public class IndexController {
 
     @PostMapping("/")
     public String indexSubmit(@ModelAttribute Status status) {
+
         LOGGER.info("Searching for {}. . .", status.getSearchForm().getFileName());
 
         commandProcessor.search(status.getSearchForm().getFileName());
@@ -47,6 +50,7 @@ public class IndexController {
     }
 
     private void resetModel(Status status) {
+
         status.setNeighbours(applicationState.getNeighbours());
         status.setOngoingRequests(new ArrayList<>(applicationState.getOngoingRequests().asMap().values()));
         status.setSearchHits(applicationState.getSearchHits());

@@ -14,12 +14,14 @@ public class DefaultParser implements RequestParser<AbstractCommand>, ReplyParse
 
     @Override
     public AbstractCommand parse(String[] commandParts, InetAddress requesterAddr, int requesterPort) {
+
         LOGGER.info("{} is not a recognised command.", commandParts[1]);
         return null;
     }
 
     @Override
     public String parse(AbstractCommand command) {
+
         LOGGER.info("{} is not a recognised command.", command);
         return null;
     }

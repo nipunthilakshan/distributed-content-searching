@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchOkParser implements ReplyParser {
+
     @Override
     public SearchReply parse(String[] commandParts, InetAddress requesterAddr, int requesterPort) {
         // length SEROK no_files IP port hops filename1 filename2

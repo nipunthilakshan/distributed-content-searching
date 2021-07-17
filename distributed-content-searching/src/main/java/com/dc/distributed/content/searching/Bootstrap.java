@@ -12,6 +12,7 @@ public class Bootstrap {
     private final CommandSender commandSender;
 
     public Bootstrap(CommandSender commandSender) {
+
         this.commandSender = commandSender;
     }
 
@@ -21,9 +22,9 @@ public class Bootstrap {
         commandSender.sendRequest(request);
     }
 
-    public void disconnectFromBootstrapServer( String bootstrapAddr, int bootstrapPort, String ipAddr, int port, String username ) throws IOException
-    {
-        UnregisterRequest unregisterRequest = new UnregisterRequest( bootstrapAddr, bootstrapPort, ipAddr, port, username );
-        commandSender.sendRequest( unregisterRequest );
+    public void disconnectFromBootstrapServer(String bootstrapAddr, int bootstrapPort, String ipAddr, int port, String username) throws IOException {
+
+        UnregisterRequest unregisterRequest = new UnregisterRequest(bootstrapAddr, bootstrapPort, ipAddr, port, username);
+        commandSender.sendRequest(unregisterRequest);
     }
 }

@@ -16,8 +16,8 @@ public class JoinRequestProcessor extends AbstractCommandProcessor<JoinRequest> 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinRequestProcessor.class);
 
-
     public JoinRequestProcessor(ApplicationState applicationState, CommandSender commandSender) {
+
         super(applicationState, commandSender);
     }
 
@@ -53,7 +53,6 @@ public class JoinRequestProcessor extends AbstractCommandProcessor<JoinRequest> 
         }
 
     }
-
 
 }
 

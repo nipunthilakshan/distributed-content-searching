@@ -5,6 +5,7 @@ import com.dc.distributed.content.searching.commands.SearchRequest;
 import java.net.InetAddress;
 
 public class SearchParser implements ReplyParser {
+
     @Override
     public SearchRequest parse(String[] commandParts, InetAddress requesterAddr, int requesterPort) {
         // length SER IP port file_name hops

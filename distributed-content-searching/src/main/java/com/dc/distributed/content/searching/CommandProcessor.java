@@ -23,7 +23,7 @@ public class CommandProcessor {
     private final LeaveRequestProcesssor leaveRequestProcesssor;
     private final LeaveOKProcessor leaveOKProcessor;
 
-    private ApplicationState applicationState;
+    private final ApplicationState applicationState;
     private final UnRegOkProcessor unRegOkProcessor;
 
     public CommandProcessor(CommandListener commandListener,
@@ -37,6 +37,7 @@ public class CommandProcessor {
                             JoinOkProcessor joinOkProcessor,
                             LeaveRequestProcesssor leaveRequestProcesssor,
                             LeaveOKProcessor leaveOKProcessor) {
+
         this.regOkProcessor = regOkProcessor;
         this.commandSender = commandSender;
         this.searchOkProcessor = searchOkProcessor;
@@ -51,6 +52,7 @@ public class CommandProcessor {
     }
 
     public void search(String fileName) {
+
         applicationState.getNeighbours().forEach(neighbour -> {
             try {
                 commandSender.sendRequest(new SearchRequest(applicationState.getIpAddress(), applicationState.getPort(), neighbour.getIp(), neighbour.getPort(), fileName, 0));
@@ -61,6 +63,7 @@ public class CommandProcessor {
     }
 
     public void unregister() {
+
         try {
             commandSender.sendRequest(new UnregisterRequest(InputParameters.getIp(), InputParameters.getPort(), InputParameters.getBootstrapAddr(), InputParameters.getBootstrapPort(), InputParameters.getUsername()));
         } catch (IOException e) {
@@ -69,6 +72,7 @@ public class CommandProcessor {
     }
 
     private void handleCommand(AbstractCommand reply) throws IOException {
+
         System.out.println("command recieved: " + reply.getCommandType());
 
         switch (reply.getCommandType()) {

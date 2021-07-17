@@ -12,6 +12,7 @@ public abstract class AbstractCommand implements Command {
     int otherPartyPort;
 
     public AbstractCommand(String issuerIp, int issuerPort, String otherPartyIp, int otherPartyPort) {
+
         this.issuerIp = issuerIp;
         this.issuerPort = issuerPort;
         this.otherPartyIp = otherPartyIp;

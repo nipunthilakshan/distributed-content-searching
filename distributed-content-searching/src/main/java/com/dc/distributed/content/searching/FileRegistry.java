@@ -14,9 +14,10 @@ public class FileRegistry {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileRegistry.class);
 
-    private List<String> storedFiles;
+    private final List<String> storedFiles;
 
     public FileRegistry() {
+
         List<String> allFiles = new ArrayList<>();
         allFiles.add("Adventures of Tintin");
         allFiles.add("Jack and Jill");
@@ -53,10 +54,12 @@ public class FileRegistry {
     }
 
     public boolean hasFile(String fileName) {
+
         return storedFiles.contains(fileName);
     }
 
     public List<String> getMatchingFiles(String fileName) {
+
         String pattern = String.format(".*\\b%s\\b.*", fileName);
 
         return storedFiles.stream().filter(e -> e.matches(pattern)).collect(Collectors.toList());

@@ -7,10 +7,11 @@ public class SearchRequest extends AbstractCommand {
 
     public static final String SER = "SER";
 
-    private String fileName;
-    private int hopCount;
+    private final String fileName;
+    private final int hopCount;
 
     public SearchRequest(String issuerIp, int issuerPort, String destAddress, int destPort, String fileName, int hopCount) {
+
         super(issuerIp, issuerPort, destAddress, destPort);
         this.fileName = fileName;
         this.hopCount = hopCount;
@@ -18,6 +19,7 @@ public class SearchRequest extends AbstractCommand {
 
     @Override
     public String getCommandType() {
+
         return SER;
     }
 }

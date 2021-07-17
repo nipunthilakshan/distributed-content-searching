@@ -15,13 +15,14 @@ public class RegOkProcessor extends AbstractCommandProcessor<RegisterReply> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegOkProcessor.class);
 
-
     public RegOkProcessor(ApplicationState applicationState, CommandSender commandSender) {
+
         super(applicationState, commandSender);
     }
 
     @Override
     protected void processSynchronously(RegisterReply reply) {
+
         ApplicationState appState = getApplicationState();
         //initiate potential neighbours list
         appState.getPotentialNeighbours().addAll(reply.getNeighbours());

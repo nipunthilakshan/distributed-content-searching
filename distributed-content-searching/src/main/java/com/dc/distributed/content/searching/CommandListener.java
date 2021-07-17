@@ -23,22 +23,26 @@ public class CommandListener implements Runnable {
     private Thread thread;
 
     public CommandListener(CommandParser commandParser, SocketHolder socketHolder) {
+
         listeners = new ArrayList<>();
         this.commandParser = commandParser;
         this.socketHolder = socketHolder;
     }
 
     public void start() {
+
         this.thread = new Thread(this);
         this.thread.start();
     }
 
     public void registerOnCommandListener(OnCommandListener onCommandListener) {
+
         this.listeners.add(onCommandListener);
     }
 
     @Override
     public void run() {
+
         DatagramSocket socket = socketHolder.getSocket();
 
         LOGGER.info("Listening for incoming requests. . .");
@@ -74,6 +78,7 @@ public class CommandListener implements Runnable {
     }
 
     public interface OnCommandListener {
+
         void onCommand(AbstractCommand command) throws IOException;
     }
 }

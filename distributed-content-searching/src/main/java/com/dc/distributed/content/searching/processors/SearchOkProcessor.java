@@ -15,11 +15,13 @@ public class SearchOkProcessor extends AbstractCommandProcessor<AbstractCommand>
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchOkProcessor.class);
 
     public SearchOkProcessor(ApplicationState applicationState, CommandSender commandSender) {
+
         super(applicationState, commandSender);
     }
 
     @Override
     protected void processSynchronously(AbstractCommand message) {
+
         SearchReply reply = (SearchReply) message;
 
         if (reply.getSearchHit() != null) {

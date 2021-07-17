@@ -11,16 +11,17 @@ public abstract class AbstractCommandProcessor<T> {
 
     private static final Object LOCK = new Object();
 
-    private ApplicationState applicationState;
-    private CommandSender commandSender;
+    private final ApplicationState applicationState;
+    private final CommandSender commandSender;
 
     public AbstractCommandProcessor(ApplicationState applicationState, CommandSender commandSender) {
+
         this.applicationState = applicationState;
         this.commandSender = commandSender;
     }
 
-    public final void process(T message) throws IOException
-    {
+    public final void process(T message) throws IOException {
+
         synchronized (LOCK) {
             processSynchronously(message);
         }

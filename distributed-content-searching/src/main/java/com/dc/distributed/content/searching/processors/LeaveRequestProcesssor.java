@@ -13,9 +13,11 @@ import java.io.IOException;
 
 @Service
 public class LeaveRequestProcesssor extends AbstractCommandProcessor<LeaveRequest> {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(LeaveRequestProcesssor.class);
 
     public LeaveRequestProcesssor(ApplicationState applicationState, CommandSender commandSender) {
+
         super(applicationState, commandSender);
     }
 

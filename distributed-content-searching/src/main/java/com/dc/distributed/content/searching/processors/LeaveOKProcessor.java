@@ -11,14 +11,17 @@ import java.io.IOException;
 
 @Service
 public class LeaveOKProcessor extends AbstractCommandProcessor<LeaveReply> {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(LeaveOKProcessor.class);
 
     public LeaveOKProcessor(ApplicationState applicationState, CommandSender commandSender) {
+
         super(applicationState, commandSender);
     }
 
     @Override
     protected void processSynchronously(LeaveReply message) throws IOException {
+
         if (message.isJoinSuccess()) {
             LOGGER.info("Successfully Left {} {}", message.getOtherPartyIp(), message.getOtherPartyPort());
         } else {
