@@ -1,8 +1,11 @@
 package com.dc.distributed.content.searching;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -27,26 +30,14 @@ public class FileRegistry {
     public FileRegistry() {
 
         List<String> allFiles = new ArrayList<>();
-        allFiles.add("Adventures of Tintin");
-        allFiles.add("Jack and Jill");
-        allFiles.add("Glee");
-        allFiles.add("The Vampire Diarie");
-        allFiles.add("King Arthur");
-        allFiles.add("Windows XP");
-        allFiles.add("Harry Potter");
-        allFiles.add("Kung Fu Panda");
-        allFiles.add("Lady Gaga");
-        allFiles.add("Twilight");
-        allFiles.add("Windows 8");
-        allFiles.add("Mission Impossible");
-        allFiles.add("Turn Up The Music");
-        allFiles.add("Super Mario");
-        allFiles.add("American Pickers");
-        allFiles.add("Microsoft Office 2010");
-        allFiles.add("Happy Feet");
-        allFiles.add("Modern Family");
-        allFiles.add("American Idol");
-        allFiles.add("Hacking for Dummies");
+        //Read File Content
+        try {
+            ClassPathResource resource = new ClassPathResource("File-Names.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+            reader.lines().forEach(file -> allFiles.add(file.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Random random = new Random();
 
