@@ -3,7 +3,12 @@ package com.dc.distributed.content.searching;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,26 +24,16 @@ public class FileRegistry {
     public FileRegistry() {
 
         List<String> allFiles = new ArrayList<>();
-        allFiles.add("Adventures of Tintin");
-        allFiles.add("Jack and Jill");
-        allFiles.add("Glee");
-        allFiles.add("The Vampire Diarie");
-        allFiles.add("King Arthur");
-        allFiles.add("Windows XP");
-        allFiles.add("Harry Potter");
-        allFiles.add("Kung Fu Panda");
-        allFiles.add("Lady Gaga");
-        allFiles.add("Twilight");
-        allFiles.add("Windows 8");
-        allFiles.add("Mission Impossible");
-        allFiles.add("Turn Up The Music");
-        allFiles.add("Super Mario");
-        allFiles.add("American Pickers");
-        allFiles.add("Microsoft Office 2010");
-        allFiles.add("Happy Feet");
-        allFiles.add("Modern Family");
-        allFiles.add("American Idol");
-        allFiles.add("Hacking for Dummies");
+
+        //Read File Content
+        try {
+            File file = ResourceUtils.getFile("classpath:File-Names.txt");
+            //File is found
+            LOGGER.debug("File Found : {}", file.exists());
+            allFiles = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Random random = new Random();
         storedFiles = new ArrayList<>();
