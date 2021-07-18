@@ -49,6 +49,14 @@ public class IndexController {
         commandProcessor.search(status.getSearchForm().getFileName());
 
         resetModel(status);
+
+        //This will avoid fast execution
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return "index";
     }
 
