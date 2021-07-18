@@ -69,7 +69,7 @@ public class FileRegistry {
         return getExistingFileList().keySet().contains(fileName);
     }
 
-    public Map<String, Integer> getStoredFiles() {
+    public static Map<String, Integer> getStoredFiles() {
 
         return getExistingFileList();
     }
@@ -82,7 +82,7 @@ public class FileRegistry {
     }
 
 
-    private Map<String, Integer> getExistingFileList() {
+    private static Map<String, Integer> getExistingFileList() {
         File nodeFolder = new File(NODE_ID + "/");
         File[] files = nodeFolder.listFiles();
         Map<String, Integer> nodeFileList = new HashMap<>();

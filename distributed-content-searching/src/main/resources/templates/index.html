@@ -26,6 +26,28 @@
     </form>
     <div class="row">
         <div class="col-sm">
+            <h3>Stored Files for this node</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">File Name</th>
+                    <th scope="col">Size</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="file, i : ${storedFiles}">
+                    <td th:text="${i.index + 1}"></td>
+                    <td th:text="${file.key}"></td>
+                    <td th:text="${file.value}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
             <h3>Neighbours</h3>
             <table class="table">
                 <thead>

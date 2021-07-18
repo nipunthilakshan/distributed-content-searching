@@ -2,6 +2,7 @@ package com.dc.distributed.content.searching.controllers;
 
 import com.dc.distributed.content.searching.ApplicationState;
 import com.dc.distributed.content.searching.CommandProcessor;
+import com.dc.distributed.content.searching.FileRegistry;
 import com.dc.distributed.content.searching.models.SearchForm;
 import com.dc.distributed.content.searching.models.Status;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ public class IndexController {
         Status status = new Status();
         resetModel(status);
         model.addAttribute("status", status);
+        model.addAttribute("storedFiles" , FileRegistry.getStoredFiles());
 
         return "index";
     }
