@@ -3,7 +3,6 @@ package com.dc.distributed.content.searching;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -24,8 +23,6 @@ public class FileRegistry {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileRegistry.class);
     public static String NODE_ID = UUID.randomUUID().toString();
-
-    private final Map<String,Integer> storedFiles;
 
     public FileRegistry() {
 
@@ -52,34 +49,46 @@ public class FileRegistry {
         allFiles.add("Hacking for Dummies");
 
         Random random = new Random();
-        storedFiles = new HashMap<>();
 
         for (int i = 0; i < 5; i++) {
             int rFile = random.nextInt(allFiles.size());
-            int rSize = random.nextInt(5);
-            storedFiles.put(allFiles.remove(rFile),rSize+1);
-        }
-        storedFiles.forEach((file,size) ->{
+            int rSize = (random.nextInt(5) + 1) * 2;
+            String file = allFiles.remove(rFile);
+            int file_size = rSize * 1024 * 1024;
+            byte[] content = new byte[file_size];
             try {
-                int file_size = size*2*1024*1024;
-                byte[] content = new byte[file_size];
-                FileUtils.writeByteArrayToFile(new File(NODE_ID+"/"+file), content);
-            }catch (Exception ex){
-                ex.printStackTrace();
+                FileUtils.writeByteArrayToFile(new File(NODE_ID + "/" + file), content);
+            } catch (Exception ex) {
+                LOGGER.error("File Creation Error : {}", ex.getMessage());
             }
-        });
-        LOGGER.info("Files selected for storing {}", storedFiles);
+        }
     }
 
     public boolean hasFile(String fileName) {
 
-        return storedFiles.keySet().contains(fileName);
+        return getExistingFileList().keySet().contains(fileName);
+    }
+
+    public Map<String, Integer> getStoredFiles() {
+
+        return getExistingFileList();
     }
 
     public List<String> getMatchingFiles(String fileName) {
 
         String pattern = String.format(".*\\b%s\\b.*", fileName);
 
-        return storedFiles.keySet().stream().filter(e -> e.matches(pattern)).collect(Collectors.toList());
+        return getExistingFileList().keySet().stream().filter(e -> e.matches(pattern)).collect(Collectors.toList());
+    }
+
+
+    private Map<String, Integer> getExistingFileList() {
+        File nodeFolder = new File(NODE_ID + "/");
+        File[] files = nodeFolder.listFiles();
+        Map<String, Integer> nodeFileList = new HashMap<>();
+        for (int f = 0; f < files.length; f++) {
+            nodeFileList.put(files[f].getName(), (int) (files[f].length() / (1024 * 1024)));
+        }
+        return nodeFileList;
     }
 }
