@@ -2,6 +2,7 @@ package com.dc.distributed.content.searching.controllers;
 
 import com.dc.distributed.content.searching.ApplicationState;
 import com.dc.distributed.content.searching.CommandProcessor;
+import com.dc.distributed.content.searching.DistributedContentSearchingApplication;
 import com.dc.distributed.content.searching.FileRegistry;
 import com.dc.distributed.content.searching.models.SearchForm;
 import com.dc.distributed.content.searching.models.Status;
@@ -52,7 +53,7 @@ public class IndexController {
 
         //This will avoid fast execution
         try {
-            Thread.sleep(3000);
+            Thread.sleep(DistributedContentSearchingApplication.WAIT_TIME_MS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
