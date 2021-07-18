@@ -37,7 +37,6 @@ public class IndexController {
         Status status = new Status();
         resetModel(status);
         model.addAttribute("status", status);
-//        model.addAttribute("storedFiles" , FileRegistry.getStoredFiles());
 
         return "index";
     }
