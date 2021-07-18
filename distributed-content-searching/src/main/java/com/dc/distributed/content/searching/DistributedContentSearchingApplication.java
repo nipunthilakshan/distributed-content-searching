@@ -15,6 +15,9 @@ public class DistributedContentSearchingApplication {
         System.out.print("Bootstrap IP Address: ");
         String bootstrapIp = in.nextLine();
 
+        System.out.print("Bootstrap Port: ");
+        String bootstrapPort = in.nextLine();
+
         System.out.print("Client IP Address: ");
         String clientIp = in.nextLine();
 
@@ -28,7 +31,7 @@ public class DistributedContentSearchingApplication {
         String username = in.nextLine();
 
         int originalArgsLen = args.length;
-        String[] extendedArgs = new String[originalArgsLen + 5];
+        String[] extendedArgs = new String[originalArgsLen + 6];
         System.arraycopy(args, 0, extendedArgs, 0, originalArgsLen);
 
         extendedArgs[originalArgsLen] = String.format("--bootstrap.ip=%s", bootstrapIp);
@@ -36,6 +39,7 @@ public class DistributedContentSearchingApplication {
         extendedArgs[originalArgsLen + 2] = String.format("--client.port=%s", clientPort);
         extendedArgs[originalArgsLen + 3] = String.format("--server.port=%s", httpPort);
         extendedArgs[originalArgsLen + 4] = String.format("--client.username=%s", username);
+        extendedArgs[originalArgsLen + 5] = String.format("--bootstrap.port=%s", bootstrapPort);
 
         SpringApplication.run(DistributedContentSearchingApplication.class, extendedArgs);
     }
