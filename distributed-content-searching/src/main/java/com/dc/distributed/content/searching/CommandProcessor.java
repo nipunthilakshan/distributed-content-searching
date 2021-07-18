@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class CommandProcessor {
@@ -53,13 +54,12 @@ public class CommandProcessor {
 
     public void search(String fileName) {
 
-        applicationState.getNeighbours().forEach(neighbour -> {
-            try {
-                commandSender.sendRequest(new SearchRequest(applicationState.getIpAddress(), applicationState.getPort(), neighbour.getIp(), neighbour.getPort(), fileName, 0));
-            } catch (IOException e) {
-                LOGGER.error("Sending SER request failed.", e);
-            }
-        });
+        try {
+            commandSender.sendRequest(new SearchRequest(applicationState.getIpAddress(), applicationState.getPort(), applicationState.getIpAddress(), applicationState.getPort(), fileName, -1));
+        }
+        catch ( IOException e ) {
+            LOGGER.error("Sending SER request failed.", e);
+        }
     }
 
     public void unregister() {
