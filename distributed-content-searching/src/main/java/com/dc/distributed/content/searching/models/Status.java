@@ -2,6 +2,7 @@ package com.dc.distributed.content.searching.models;
 
 import com.dc.distributed.content.searching.Neighbour;
 import com.dc.distributed.content.searching.commands.SearchRequest;
+import java.util.Map;
 import lombok.Data;
 
 import java.util.List;

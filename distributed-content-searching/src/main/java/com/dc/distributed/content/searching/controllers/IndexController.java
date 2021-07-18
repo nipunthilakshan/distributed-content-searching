@@ -2,8 +2,10 @@ package com.dc.distributed.content.searching.controllers;
 
 import com.dc.distributed.content.searching.ApplicationState;
 import com.dc.distributed.content.searching.CommandProcessor;
+import com.dc.distributed.content.searching.FileRegistry;
 import com.dc.distributed.content.searching.models.SearchForm;
 import com.dc.distributed.content.searching.models.Status;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -34,17 +36,19 @@ public class IndexController {
         Status status = new Status();
         resetModel(status);
         model.addAttribute("status", status);
+        model.addAttribute("storedFiles" , FileRegistry.getStoredFiles());
 
         return "index";
     }
 
     @PostMapping("/")
-    public String indexSubmit(@ModelAttribute Status status) {
+    public String indexSubmit(@ModelAttribute Status status , Model model ) {
 
         LOGGER.info("Searching for {}. . .", status.getSearchForm().getFileName());
 
         commandProcessor.search(status.getSearchForm().getFileName());
 
+        model.addAttribute("storedFiles" , FileRegistry.getStoredFiles());
         resetModel(status);
         return "index";
     }
