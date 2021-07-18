@@ -15,4 +15,5 @@ class Status {
     private List<SearchRequest> ongoingRequests;
     private LeaveForm leaveForm;
     private List<SearchHit> searchHits;
+    private Map<String, Integer> storedFiles;
 }

@@ -5,6 +5,7 @@ import com.dc.distributed.content.searching.CommandProcessor;
 import com.dc.distributed.content.searching.FileRegistry;
 import com.dc.distributed.content.searching.models.SearchForm;
 import com.dc.distributed.content.searching.models.Status;
+import java.io.File;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,19 +37,18 @@ public class IndexController {
         Status status = new Status();
         resetModel(status);
         model.addAttribute("status", status);
-        model.addAttribute("storedFiles" , FileRegistry.getStoredFiles());
+//        model.addAttribute("storedFiles" , FileRegistry.getStoredFiles());
 
         return "index";
     }
 
     @PostMapping("/")
-    public String indexSubmit(@ModelAttribute Status status , Model model ) {
+    public String indexSubmit(@ModelAttribute Status status) {
 
         LOGGER.info("Searching for {}. . .", status.getSearchForm().getFileName());
 
         commandProcessor.search(status.getSearchForm().getFileName());
 
-        model.addAttribute("storedFiles" , FileRegistry.getStoredFiles());
         resetModel(status);
         return "index";
     }
@@ -59,5 +59,6 @@ public class IndexController {
         status.setOngoingRequests(new ArrayList<>(applicationState.getOngoingRequests().asMap().values()));
         status.setSearchHits(applicationState.getSearchHits());
         status.setSearchForm(new SearchForm());
+        status.setStoredFiles(FileRegistry.getStoredFiles());
     }
 }
