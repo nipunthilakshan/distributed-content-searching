@@ -32,16 +32,15 @@ public class DownloadController {
 
     @GetMapping("/download/{file_name}")
     public ResponseEntity<Resource> download(@PathVariable("file_name") String fileName) {
-        System.out.println("Download Received To User : "+username);
         if (this.fileRegistry.hasFile(fileName)) {
-            byte[] content = new byte[2048];
-            random.nextBytes(content);
             try {
-                File file = new File(fileName);
+                File file = new File(FileRegistry.NODE_ID+"/"+fileName);
                 return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(new ByteArrayResource(FileUtils.readFileToByteArray(file)));
             }catch (Exception ex){
                 ex.printStackTrace();
             }
+            byte[] content = new byte[2048];
+            random.nextBytes(content);
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(new ByteArrayResource(content));
         }
 
