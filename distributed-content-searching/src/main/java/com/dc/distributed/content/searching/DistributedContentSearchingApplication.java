@@ -8,6 +8,8 @@ import java.util.Scanner;
 @SpringBootApplication
 public class DistributedContentSearchingApplication {
 
+    public static long WAIT_TIME_MS = 1000;
+
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
@@ -29,6 +31,10 @@ public class DistributedContentSearchingApplication {
 
         System.out.print("Username: ");
         String username = in.nextLine();
+
+        System.out.print("Wait Time (Millis): ");
+        WAIT_TIME_MS = Long.parseLong(in.nextLine());
+
 
         int originalArgsLen = args.length;
         String[] extendedArgs = new String[originalArgsLen + 6];
