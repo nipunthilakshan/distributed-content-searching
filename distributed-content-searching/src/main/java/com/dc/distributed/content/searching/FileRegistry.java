@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,7 +50,14 @@ public class FileRegistry {
             }
             storedFiles.add(allFiles.remove(random.nextInt(allFiles.size())));
         }
-
+        storedFiles.forEach(file ->{
+            try {
+                File createFile = new File(file);
+                createFile.createNewFile();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        });
         LOGGER.info("Files selected for storing {}", storedFiles);
     }
 
