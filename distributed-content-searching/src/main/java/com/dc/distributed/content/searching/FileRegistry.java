@@ -49,11 +49,11 @@ public class FileRegistry {
         for (int i = 0; i < 5; i++) {
             int rFile = random.nextInt(allFiles.size());
             int rSize = random.nextInt(5);
-            storedFiles.put(allFiles.remove(rFile),rSize+1);
+            storedFiles.put(allFiles.remove(rFile),(rSize+1)*2);
         }
         storedFiles.forEach((file,size) ->{
             try {
-                int file_size = size*2*1024*1024;
+                int file_size = size*1024*1024;
                 byte[] content = new byte[file_size];
                 FileUtils.writeByteArrayToFile(new File(NODE_ID+"/"+file), content);
             }catch (Exception ex){
@@ -66,6 +66,9 @@ public class FileRegistry {
     public boolean hasFile(String fileName) {
 
         return storedFiles.keySet().contains(fileName);
+    }
+    public Map<String,Integer> getStoredFiles(){
+        return storedFiles;
     }
 
     public List<String> getMatchingFiles(String fileName) {
