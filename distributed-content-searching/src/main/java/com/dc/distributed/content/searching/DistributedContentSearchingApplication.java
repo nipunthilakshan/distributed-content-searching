@@ -1,5 +1,7 @@
 package com.dc.distributed.content.searching;
 
+import com.dc.distributed.content.searching.util.ResourceLoader;
+import java.util.Properties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,9 +11,11 @@ import java.util.Scanner;
 public class DistributedContentSearchingApplication {
 
     public static long WAIT_TIME_MS = 1000;
+    public static Properties externalAppProperties;
 
     public static void main(String[] args) {
 
+        externalAppProperties = ResourceLoader.loadAppProperties("external.app.properties");
         Scanner in = new Scanner(System.in);
 
         System.out.print("Bootstrap IP Address: ");
@@ -32,8 +36,7 @@ public class DistributedContentSearchingApplication {
         System.out.print("Username: ");
         String username = in.nextLine();
 
-        System.out.print("Wait Time (Millis): ");
-        WAIT_TIME_MS = Long.parseLong(in.nextLine());
+        WAIT_TIME_MS = Long.parseLong(externalAppProperties.getProperty("wait.time"));
 
 
         int originalArgsLen = args.length;
