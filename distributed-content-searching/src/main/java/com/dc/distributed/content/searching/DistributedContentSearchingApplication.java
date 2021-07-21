@@ -18,14 +18,9 @@ public class DistributedContentSearchingApplication {
         externalAppProperties = ResourceLoader.loadAppProperties("external.app.properties");
         Scanner in = new Scanner(System.in);
 
-        System.out.print("Bootstrap IP Address: ");
-        String bootstrapIp = in.nextLine();
-
-        System.out.print("Bootstrap Port: ");
-        String bootstrapPort = in.nextLine();
-
-        System.out.print("Client IP Address: ");
-        String clientIp = in.nextLine();
+        String bootstrapIp = externalAppProperties.getProperty("bootstrap.ip");
+        String bootstrapPort = externalAppProperties.getProperty("bootstrap.port");
+        String clientIp = externalAppProperties.getProperty("client.ip");
 
         System.out.print("Client Port: ");
         String clientPort = in.nextLine();

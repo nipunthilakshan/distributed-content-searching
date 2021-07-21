@@ -1,130 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="/index.css">
-    <title>Formicary Client</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="/index.css">
+  <title>Distributed Content Searching Client</title>
 </head>
 <body>
 
 <div class="container">
-    <form action="#" th:action="@{/}" th:object="${status.searchForm}" method="post">
-        <div class="search-bar">
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <input th:field="*{fileName}" type="text" class="form-control"
-                           placeholder="Search for file names. . ."
-                           aria-label="Search for file names">
-                    <div class="inline-search">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </div>
-            </div>
+  <form action="#" th:action="@{/}" th:object="${status.searchForm}" method="post">
+    <div class="search-bar">
+      <div class="form-group">
+        <div class="input-group mb-3">
+          <input th:field="*{fileName}" type="text" class="form-control"
+                 placeholder="Search your files here"
+                 aria-label="Search for file names">
+          <div class="inline-search">
+            <button class="btn btn-dark" type="submit">Search</button>
+          </div>
         </div>
-    </form>
-    <div class="row">
-        <div class="col-sm">
-            <h3>Stored Files for this node</h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Size</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="file, i : ${status.storedFiles}">
-                    <td th:text="${i.index + 1}"></td>
-                    <td th:text="${file.key}"></td>
-                    <td th:text="${file.value}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+      </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm">
-            <h3>Neighbours</h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">IP Address</th>
-                    <th scope="col">Port</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="neighbour, i : ${status.neighbours}">
-                    <td th:text="${i.index + 1}"></td>
-                    <td th:text="${neighbour.getIp()}"></td>
-                    <td th:text="${neighbour.getPort()}"></td>
-                </tr>
-                </tbody>
-            </table>
+  </form>
+  <div class="row">
+    <div class="col-sm">
+      <div class="card">
+        <h5 class="card-header">Stored files for this node</h5>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">File Name</th>
+              <th scope="col">Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="file, i : ${status.storedFiles}">
+              <td th:text="${i.index + 1}"></td>
+              <td th:text="${file.key}"></td>
+              <td th:text="${file.value}"></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="col-sm">
-            <h3>Ongoing Requests</h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Requester IP</th>
-                    <th scope="col">Requester Port</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="request, i : ${status.ongoingRequests}">
-                    <td th:text="${i.index + 1}"></td>
-                    <td th:text="${request.getFileName()}"></td>
-                    <td th:text="${request.getIssuerIp()}"></td>
-                    <td th:text="${request.getIssuerIp()()}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-sm">
-            <h3>Search Hits</h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Hops</th>
-                    <th scope="col">IP Address</th>
-                    <th scope="col">Port</th>
-                    <th scope="col">Download</th>
-                </tr>
-                </thead>
-                <tbody>
-                <span th:each="hit, i : ${status.getSearchHits()}">
+  </div>
+  <div class="mt-2 col-md-12">
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="card">
+        <h5 class="card-header">Neighbours</h5>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">IP Address</th>
+              <th scope="col">Port</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="neighbour, i : ${status.neighbours}">
+              <td th:text="${i.index + 1}"></td>
+              <td th:text="${neighbour.getIp()}"></td>
+              <td th:text="${neighbour.getPort()}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2 col-md-12">
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="card">
+        <h5 class="card-header">Search Hits</h5>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">File Name</th>
+              <th scope="col">Hops</th>
+              <th scope="col">IP Address</th>
+              <th scope="col">Port</th>
+              <th scope="col">Download</th>
+            </tr>
+            </thead>
+            <tbody>
+            <span th:each="hit, i : ${status.getSearchHits()}">
                     <tr th:each="fileName, j : ${hit.getFileNames()}">
                         <td th:text="${i.index + 1}"></td>
                         <td th:text="${fileName}"></td>
                         <td th:text="${hit.getHops()}"></td>
                         <td th:text="${hit.getOwnerIp()}"></td>
                         <td th:text="${hit.getOwnerPort()}"></td>
-                        <td><a th:href="@{http://{ip}:{port}/download/{fileName}(ip=${hit.getOwnerIp()}, port=${hit.getOwnerPort()}, fileName=${fileName})}">Download</a></td>
+                        <td><a
+                            th:href="@{http://{ip}:{port}/download/{fileName}(ip=${hit.getOwnerIp()}, port=${hit.getOwnerPort()}, fileName=${fileName})}">Download</a></td>
                     </tr>
                 </span>
-                </tbody>
-            </table>
+            </tbody>
+          </table>
         </div>
-        <div class="col-sm">
-        </div>
-    </div>
-
-    <div class="row">
-        <form action="#" th:action="@{/leave}" th:object="${status.leaveForm}" method="post">
-            <button type="submit" class="btn btn-danger">Leave Network</button>
-        </form>
-    </div>
+      </div>
+  </div>
+  <div class="mt-3 col-md-12">
+  </div>
+  <div class="row">
+    <form action="#" th:action="@{/leave}" th:object="${status.leaveForm}" method="post">
+      <button type="submit" class="btn btn-danger">Leave Network</button>
+    </form>
+  </div>
 </div>
 </body>
 </html>
