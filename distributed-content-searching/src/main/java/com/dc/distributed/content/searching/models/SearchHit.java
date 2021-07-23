@@ -11,4 +11,5 @@ class SearchHit {
     private int ownerPort;
     private List<String> fileNames;
     private int hops;
+    private long processTime;
 }
