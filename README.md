@@ -7,13 +7,13 @@
 3. Run the bootstrap server(ip: 127.0.0.1, port: 55555).
 4. Run the client with `java -jar distributed-file-system.jar`.
 5. Enter Client Port.
-6. Enter User Interface Port.
+6. Enter User Interface Port(Http port).
 7. Enter Username.
 8. Repeat above steps as for the required nodes.
 
 #### Usage
 - The list of files will be created and added to a node specific folder at the startup.
-- Access the user interface by navigating to **[client-ip]:[port]** using the browser.
+- Access the user interface by navigating to **[client-ip]:[http-port]** using the browser.
 - Search by typing in files names to the search field.
 - Leave the system using the Leave option at the bottom.
 - Download the files from the search results.
